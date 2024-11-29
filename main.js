@@ -1,12 +1,8 @@
 // Fetch limited product from the Fake Store API
 async function fetchProducts() {
     try {
-        const response = await fetch('https://fakestoreapi.com/products?limit=10');
-        console.log(response);
-        
-        const products = await response.json();
-        console.log(products);
-        
+        const response = await fetch('https://fakestoreapi.com/products?limit=10');       
+        const products = await response.json();   
 
         const productSection = document.getElementById('product');
 
@@ -98,6 +94,45 @@ async function sorting() {
     }
 }
 
-fetchProducts();
+async function allProduct() {
+    try {
+        const response = await fetch('https://fakestoreapi.com/products');
+        const products = await response.json();
+
+        const productSection = document.getElementById('all-prod');
+
+        for (const product of products) {
+
+            const prodDiv = document.createElement('div');
+            prodDiv.className = 'prod';
+
+            const img = document.createElement('img');
+            img.src = product.image;
+            img.alt = product.title;
+            img.className = 'img-pro';
+            prodDiv.appendChild(img);
+
+            const desSpan = document.createElement('span');
+            desSpan.className = 'des';
+
+            const title = document.createElement('h2');
+            title.textContent = product.title;
+            desSpan.appendChild(title);
+
+            const price = document.createElement('h4');
+            price.textContent = `$${product.price}`;
+            desSpan.appendChild(price);
+
+            prodDiv.appendChild(desSpan);
+
+            productSection.appendChild(prodDiv);
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+fetchProducts()
 categories()
 sorting()
+allProduct()
