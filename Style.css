@@ -73,6 +73,10 @@ header a li:hover::after {
     padding: 10px 0;
 }
 
+body{
+    background: linear-gradient(45deg,black,white);
+}
+
 .prod {
     border: 1px solid #ccc;
     border-radius: 10px;
